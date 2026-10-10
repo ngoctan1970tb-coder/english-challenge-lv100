@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b1020"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon-192.png" type="image/png"><link rel="apple-touch-icon" href="./icons/icon-192.png">
+<title>English Challenge LV100</title>
+<style>
+:root{--bg:#0b1020;--panel:#141c31;--panel2:#1b2640;--text:#f4f7ff;--muted:#aab6d1;--purple:#a78bfa;--green:#34d399;--gold:#fbbf24;--red:#fb7185}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#1b2250 0,#0b1020 60%);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+main{max-width:760px;margin:auto;padding:20px 14px 48px}.top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:16px}.brand{font-weight:850;font-size:clamp(1.1rem,4vw,1.55rem);letter-spacing:.2px}.sub{color:var(--muted);font-size:.9rem}.pill{border:1px solid #55438c;color:#e7ddff;background:#261d48;padding:6px 10px;border-radius:999px;font-size:.78rem;font-weight:800;white-space:nowrap}
+.card{background:linear-gradient(150deg,rgba(25,35,61,.98),rgba(17,24,43,.98));border:1px solid #2d3a5b;border-radius:22px;padding:clamp(16px,4vw,26px);box-shadow:0 18px 55px #0003;margin-bottom:14px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{background:#0d1428;border:1px solid #263453;border-radius:14px;padding:12px}.stat .label{font-size:.78rem;color:var(--muted)}.stat strong{display:block;font-size:1.25rem;margin-top:4px;overflow-wrap:anywhere}.exp{color:var(--purple)}
+.progress{height:8px;background:#28324b;border-radius:99px;overflow:hidden;margin:12px 0 6px}.progress span{display:block;height:100%;background:linear-gradient(90deg,#8b5cf6,#c084fc);width:0;transition:width .2s}
+.qmeta{display:flex;justify-content:space-between;gap:10px;align-items:center;color:var(--muted);font-size:.9rem}.vietnamese{font-size:clamp(1.8rem,7vw,2.6rem);font-weight:850;margin:18px 0 8px;line-height:1.15}.hint{color:var(--muted);margin-bottom:16px}.field{width:100%;border-radius:13px;border:1px solid #405073;background:#0a1122;color:var(--text);padding:14px;font:inherit;outline:none}.field:focus{border-color:var(--purple);box-shadow:0 0 0 3px #a78bfa2b}
+button{font:inherit;font-weight:750;cursor:pointer;border:0;border-radius:12px;padding:12px 14px;color:#101225;background:linear-gradient(135deg,#c4b5fd,#a78bfa);transition:transform .12s,filter .12s}button:hover{filter:brightness(1.07)}button:active{transform:scale(.98)}button:disabled{opacity:.4;cursor:not-allowed}.secondary{background:#222e49;border:1px solid #3a4a6c;color:var(--text)}.danger{background:#3b2034;border:1px solid #70334c;color:#ffd9e2}.gold{background:linear-gradient(135deg,#fde68a,#fbbf24);color:#352400}.btnrow{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}.btnrow button{flex:1;min-width:130px}.feedback{margin-top:14px;padding:12px 14px;border-radius:12px;display:none}.feedback.good{display:block;background:#103b35;border:1px solid #1d7968;color:#bbf7e7}.feedback.bad{display:block;background:#42202c;border:1px solid #87394f;color:#ffe0e7}.feedback.neutral{display:block;background:#242b47;border:1px solid #4b5681;color:#e2e7ff}
+.shophead{display:flex;justify-content:space-between;align-items:center;gap:12px}.shophead h2{margin:0}.items{display:grid;gap:10px;margin-top:14px}.item{display:flex;gap:12px;align-items:center;padding:14px;background:#0d1428;border:1px solid #293653;border-radius:14px}.item .emoji{font-size:1.7rem}.item .desc{flex:1}.item strong{display:block}.item small{display:block;color:var(--muted);margin-top:3px}.price{font-weight:800;white-space:nowrap}.owned{color:var(--green);font-size:.8rem}
+#cheatBtn{position:fixed;right:13px;top:12px;z-index:5;box-shadow:0 8px 30px #0007;background:#301f55;border:1px solid #8666c9;color:#f1eaff}
+.modal{position:fixed;inset:0;background:#050815d9;z-index:10;display:none;align-items:center;justify-content:center;padding:16px}.modal.show{display:flex}.modalbox{width:min(100%,480px);max-height:90vh;overflow:auto;background:#141c31;border:1px solid #46537a;border-radius:20px;padding:22px;box-shadow:0 20px 80px #0009}.modalbox h2{margin:0 0 6px}.modalbox p{color:var(--muted);margin-top:0}.modalbox .field{margin:8px 0 12px}.commands{display:grid;gap:9px;margin:15px 0}.cmd{display:flex;gap:10px;align-items:center;padding:12px;border:1px solid #344361;background:#0d1428;border-radius:12px}.cmd input{accent-color:#a78bfa;width:18px;height:18px}.toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:#18233c;border:1px solid #4b5c80;color:white;padding:11px 16px;border-radius:12px;display:none;z-index:20;max-width:90vw;text-align:center}.foot{text-align:center;color:#8190b0;font-size:.8rem;margin-top:20px}
+@media(max-width:460px){.stats{grid-template-columns:1fr 1fr}.stat:last-child{grid-column:1/-1}.top{padding-right:100px}.item{align-items:flex-start}.price{font-size:.85rem}.btnrow button{min-width:100px}}
+</style>
+</head>
+<body>
+<button type="button" id="cheatBtn" type="button">🔐 CHEAT</button>
+<main>
+  <div class="top"><div><div class="brand">⚡ English Challenge LV100</div><div class="sub">Học từ vựng · Vượt qua 100 câu hỏi</div></div><span class="pill" id="modePill">NORMAL MODE</span></div>
+  <section class="card">
+    <div class="stats">
+      <div class="stat"><div class="label">EXP hiện tại</div><strong class="exp" id="expValue">0 EXP</strong></div>
+      <div class="stat"><div class="label">Tiến độ</div><strong id="progressText">0 / 100</strong></div>
+      <div class="stat"><div class="label">Vật phẩm</div><strong id="inventoryText">0</strong></div>
+    </div>
+    <div class="progress"><span id="progressBar"></span></div>
+    <div class="qmeta"><span id="questionNum">Câu 1 / 100</span><span id="bonusText">Thưởng chuẩn: +10 EXP</span></div>
+    <div class="vietnamese" id="prompt">Xin chào</div>
+    <div class="hint" id="hint">💡 Gợi ý: Bắt đầu bằng chữ H.</div>
+    <input class="field" id="answerInput" placeholder="Nhập đáp án tiếng Anh..." autocomplete="off" autocapitalize="none">
+    <div class="btnrow"><button type="button" id="checkBtn">Kiểm tra đáp án</button><button class="secondary" id="revealBtn">👁️ Xem đáp án</button></div>
+    <div class="btnrow"><button class="secondary" id="hintBtn">💡 Dùng gợi ý nâng cao</button><button class="secondary" id="skipBtn">⏭️ Bỏ qua · Miễn phí</button><button class="gold" id="shopBtn">🛒 Cửa hàng</button></div>
+    <div class="feedback" id="feedback" role="status" aria-live="polite"></div>
+  </section>
+  <section class="card" id="shopPanel">
+    <div class="shophead"><h2>🛒 Cửa hàng</h2><span class="pill">EXP: <span id="shopExp">0</span></span></div>
+    <div class="sub">Chọn vật phẩm. Trong cheat mode, EXP vô hạn chỉ áp dụng cho bản game này.</div>
+    <div class="items">
+      <div class="item"><div class="emoji">💡</div><div class="desc"><strong>Gợi ý nâng cao</strong><small>Thêm một gợi ý cho câu hiện tại</small></div><div class="price">100 EXP</div><button class="secondary" data-buy="hint">Mua</button></div>
+      <div class="item"><div class="emoji">👁️</div><div class="desc"><strong>Thẻ xem đáp án</strong><small>Dùng một lần để hiện đáp án</small></div><div class="price">99.999 EXP</div><button class="secondary" data-buy="reveal">Mua</button></div>
+      <div class="item"><div class="emoji">👑</div><div class="desc"><strong>Xem đáp án vĩnh viễn</strong><small id="permDesc">Mở khóa quyền xem đáp án</small></div><div class="price">999.999 EXP</div><button class="secondary" data-buy="permanent">Mua</button></div>
+      <div class="item"><div class="emoji">⚡</div><div class="desc"><strong>Bỏ qua câu hỏi</strong><small>Hiện đáp án và chuyển câu, không nhận EXP</small></div><div class="price">Miễn phí</div><button class="secondary" data-buy="skip">Dùng</button></div>
+    </div>
+  </section>
+  <div class="foot">Tiến độ và vật phẩm được lưu trên thiết bị này bằng bộ nhớ trình duyệt.</div>
+</main>
+<div class="modal" id="cheatModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+ <div class="modalbox">
+  <div class="shophead"><h2 id="modalTitle">🔐 Khu vực CHEAT</h2><button class="secondary" id="closeModal">Đóng</button></div>
+  <p id="modalDescription">Nhập mật khẩu để mở bảng lệnh riêng trong game.</p>
+  <form id="passwordForm"><input class="field" id="passwordInput" type="password" placeholder="Mật khẩu..." autocomplete="current-password"><button type="submit" style="width:100%">Mở khóa</button></form>
+  <div id="cheatCommands" hidden>
+   <div class="commands">
+    <label class="cmd"><input type="radio" name="command" value="INFINITE_EXP" checked><span><strong>♾️ INFINITE_EXP</strong><br><small>EXP vô hạn trong game</small></span></label>
+    <label class="cmd"><input type="radio" name="command" value="MAXEXP"><span><strong>💎 MAXEXP</strong><br><small>Đặt EXP về 999.999</small></span></label>
+    <label class="cmd"><input type="radio" name="command" value="SHOWANSWER"><span><strong>👁️ SHOWANSWER</strong><br><small>Hiện đáp án câu hiện tại</small></span></label>
+    <label class="cmd"><input type="radio" name="command" value="GODMODE"><span><strong>👑 GODMODE</strong><br><small>Hỗ trợ tối đa, bật gợi ý và xem đáp án</small></span></label>
+   </div>
+   <button type="button" id="runCommand" style="width:100%">Chạy lệnh</button>
+   <button type="button" id="lockCheat" class="secondary" style="width:100%;margin-top:8px">Khóa bảng lệnh</button>
+  </div>
+  <div class="feedback" id="cheatFeedback"></div>
+ </div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+(() => {
+"use strict";
+const questions = [
+["Xin chào","hello","Bắt đầu bằng chữ H."],["Cảm ơn","thank you","Gồm hai từ, bắt đầu bằng T."],["Tạm biệt","goodbye","Bắt đầu bằng G."],["Gia đình","family","Bắt đầu bằng F."],["Trường học","school","Bắt đầu bằng S."],
+["Bạn bè","friends","Dạng số nhiều của friend."],["Đồ ăn","food","Bắt đầu bằng F."],["Nước","water","Bắt đầu bằng W."],["Cuốn sách","book","Bắt đầu bằng B."],["Cái ghế","chair","Bắt đầu bằng C."],
+["Bữa sáng","breakfast","Bắt đầu bằng B."],["Bệnh viện","hospital","Bắt đầu bằng H."],["Thư viện","library","Bắt đầu bằng L."],["Thời tiết","weather","Bắt đầu bằng W."],["Giao thông","traffic","Bắt đầu bằng T."],
+["Môi trường","environment","Bắt đầu bằng E."],["Kinh nghiệm","experience","Bắt đầu bằng E."],["Thành công","success","Bắt đầu bằng S."],["Cơ hội","opportunity","Bắt đầu bằng O."],["Trách nhiệm","responsibility","Bắt đầu bằng R."],
+["Kiến thức","knowledge","Bắt đầu bằng K."],["Phát triển","develop","Bắt đầu bằng D."],["Bảo vệ (động từ)","protect","Bắt đầu bằng P."],["Cải thiện","improve","Bắt đầu bằng I."],["Thử thách","challenge","Bắt đầu bằng C."],
+["Mục tiêu","goal","Bắt đầu bằng G."],["Quyết định","decision","Bắt đầu bằng D."],["Giải pháp","solution","Bắt đầu bằng S."],["Tự tin","confident","Bắt đầu bằng C."],["Sáng tạo","creativity","Bắt đầu bằng C."],
+["Giao tiếp","communication","Bắt đầu bằng C."],["Thành tựu","achievement","Bắt đầu bằng A."],["Kiên trì","perseverance","Bắt đầu bằng P."],["Khả năng","ability","Bắt đầu bằng A."],["Lựa chọn","choice","Bắt đầu bằng C."],
+["Ảnh hưởng","influence","Bắt đầu bằng I."],["Độc lập","independent","Bắt đầu bằng I."],["Trách nhiệm giải trình","accountability","Bắt đầu bằng A."],["Cân bằng","balance","Bắt đầu bằng B."],["Động lực","motivation","Bắt đầu bằng M."],
+["Hiệu quả","efficiency","Bắt đầu bằng E."],["Mục đích","purpose","Bắt đầu bằng P."],["Quan điểm","perspective","Bắt đầu bằng P."],["Tài nguyên","resource","Bắt đầu bằng R."],["Đóng góp","contribution","Bắt đầu bằng C."],
+["Hợp tác","cooperation","Bắt đầu bằng C."],["Phân tích","analysis","Bắt đầu bằng A."],["Đánh giá","evaluation","Bắt đầu bằng E."],["Ưu tiên","priority","Bắt đầu bằng P."],["Chiến lược","strategy","Bắt đầu bằng S."],
+["Đổi mới","innovation","Bắt đầu bằng I."],["Bền vững","sustainable","Bắt đầu bằng S."],["Năng suất","productivity","Bắt đầu bằng P."],["Tác động","impact","Bắt đầu bằng I."],["Tiềm năng","potential","Bắt đầu bằng P."],
+["Lợi ích","benefit","Bắt đầu bằng B."],["Hạn chế","limitation","Bắt đầu bằng L."],["Thành phần","component","Bắt đầu bằng C."],["Bằng chứng","evidence","Bắt đầu bằng E."],["Giả thuyết","hypothesis","Bắt đầu bằng H."],
+["Khái niệm","concept","Bắt đầu bằng C."],["Phương pháp","method","Bắt đầu bằng M."],["Quy trình","process","Bắt đầu bằng P."],["Kết quả","outcome","Bắt đầu bằng O."],["Xu hướng","trend","Bắt đầu bằng T."],
+["Phân phối","distribution","Bắt đầu bằng D."],["Tiêu chuẩn","standard","Bắt đầu bằng S."],["Chính sách","policy","Bắt đầu bằng P."],["Quản lý","management","Bắt đầu bằng M."],["Lãnh đạo","leadership","Bắt đầu bằng L."],
+["Thương lượng","negotiation","Bắt đầu bằng N."],["Thuyết phục","persuasion","Bắt đầu bằng P."],["Thích nghi","adapt","Bắt đầu bằng A."],["Nhận thức","awareness","Bắt đầu bằng A."],["Độ tin cậy","reliability","Bắt đầu bằng R."],
+["Chính xác","accuracy","Bắt đầu bằng A."],["Phức tạp","complexity","Bắt đầu bằng C."],["Khả thi","feasibility","Bắt đầu bằng F."],["Tính nhất quán","consistency","Bắt đầu bằng C."],["Minh bạch","transparency","Bắt đầu bằng T."],
+["Đạo đức","ethics","Bắt đầu bằng E."],["Bảo mật","security","Bắt đầu bằng S."],["Quyền riêng tư","privacy","Bắt đầu bằng P."],["Khả năng phục hồi","resilience","Bắt đầu bằng R."],["Tư duy phản biện","critical thinking","Gồm hai từ, bắt đầu bằng C."],
+["Lập luận","reasoning","Bắt đầu bằng R."],["Suy luận","inference","Bắt đầu bằng I."],["Tổng hợp","synthesis","Bắt đầu bằng S."],["Đổi mới sáng tạo","innovativeness","Bắt đầu bằng I."],["Chuyên môn","expertise","Bắt đầu bằng E."],
+["Quan điểm chủ quan","subjectivity","Bắt đầu bằng S."],["Khách quan","objectivity","Bắt đầu bằng O."],["Độ chính trực","integrity","Bắt đầu bằng I."],["Tận tâm","dedication","Bắt đầu bằng D."],["Chủ động","proactive","Bắt đầu bằng P."],
+["Tối ưu hóa","optimization","Bắt đầu bằng O."],["Phân bổ","allocation","Bắt đầu bằng A."],["Khả năng mở rộng","scalability","Bắt đầu bằng S."],["Liên kết","interconnection","Bắt đầu bằng I."],["Chuyển đổi","transformation","Bắt đầu bằng T."],
+
+];
+const PASS = "nhandepzaii_123";
+const $ = id => document.getElementById(id);
+const defaultState = () => ({index:0,exp:0,infinite:false,answered:[],skipped:[],hintCards:0,revealCards:0,permanent:false,godmode:false,unlocked:false});
+let state;
+try { state = {...defaultState(), ...JSON.parse(localStorage.getItem("ec100-save")||"{}")}; } catch { state=defaultState(); }
+state.index=Math.max(0,Math.min(100,Number(state.index)||0));
+let advancedHintUsed=false;
+function save(){try{localStorage.setItem("ec100-save",JSON.stringify(state));}catch{}}
+function expLabel(){return state.infinite?"∞ EXP":`${state.exp.toLocaleString("vi-VN")} EXP`;}
+function rewardFor(n){if(n%40===0)return {mult:5,exp:50};if(n%30===0)return {mult:4,exp:40};if(n%20===0)return {mult:2,exp:20};return {mult:1,exp:10};}
+function current(){return questions[state.index];}
+function normalize(s){return s.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[’']/g,"'").replace(/\s+/g," ");}
+function toast(msg){$("toast").textContent=msg;$("toast").style.display="block";clearTimeout(toast.t);toast.t=setTimeout(()=>$("toast").style.display="none",2600);}
+function feedback(msg,type="neutral"){const el=$("feedback");el.textContent=msg;el.className="feedback "+type;}
+function hideFeedback(){$("feedback").className="feedback";$("feedback").textContent="";}
+function render(){
+ const done=Math.min(100,state.answered.length+state.skipped.length);
+ $("expValue").textContent=expLabel();$("shopExp").textContent=state.infinite?"∞":state.exp.toLocaleString("vi-VN");
+ $("progressText").textContent=`${done} / 100`;$("progressBar").style.width=done+"%";
+ $("inventoryText").textContent=(state.hintCards||0)+(state.revealCards||0)+(state.permanent?1:0);
+ $("modePill").textContent=state.infinite?"INFINITE EXP":state.godmode?"GODMODE":"NORMAL MODE";
+ $("modePill").style.borderColor=state.infinite||state.godmode?"#8666c9":"#55438c";
+ $("permDesc").textContent=state.permanent?"Đã sở hữu vĩnh viễn":"Mở khóa quyền xem đáp án";
+ const q=current();
+ if(!q){$("questionNum").textContent="Hoàn thành 100 / 100";$("prompt").textContent="🏆 Bạn đã chinh phục LV100!";$("hint").textContent="Chúc mừng bạn đã hoàn thành thử thách!";$("answerInput").disabled=true;$("checkBtn").disabled=true;$("skipBtn").disabled=true;$("revealBtn").disabled=true;$("hintBtn").disabled=true;$("bonusText").textContent="Hoàn thành!";return;}
+ $("answerInput").disabled=false;$("checkBtn").disabled=false;$("skipBtn").disabled=false;$("revealBtn").disabled=false;$("hintBtn").disabled=false;
+ $("questionNum").textContent=`Câu ${state.index+1} / 100`;
+ const reward=rewardFor(state.index+1);$("bonusText").textContent=reward.mult>1?`Thưởng ×${reward.mult}: +${reward.exp} EXP`:"Thưởng chuẩn: +10 EXP";
+ $("prompt").textContent=q[0];$("hint").textContent="💡 Gợi ý: "+q[2];
+ $("answerInput").value="";hideFeedback();advancedHintUsed=false;
+}
+function addExp(amount){if(!state.infinite)state.exp+=amount;}
+function advance(skipped=false){
+ const n=state.index+1;
+ if(skipped)state.skipped.push(n);else state.answered.push(n);
+ state.index++;
+ save();render();
+ if(state.index>=100){feedback("🏆 Hoàn thành toàn bộ 100 câu!","good");return;}
+ toast(skipped?`Đã bỏ qua câu ${n}.`:`Đã hoàn thành câu ${n}!`);
+}
+function check(){
+ if(!current())return;
+ const input=$("answerInput").value;
+ if(!input.trim()){feedback("Nhập đáp án trước nhé!","neutral");return;}
+ const aliases = {5:["friend","friends"], 22:["protect","protection"]};
+ const acceptable=[current()[1],...(aliases[state.index]||[])].map(normalize);
+ if(acceptable.includes(normalize(input))){
+  const q=current();
+  const n=state.index+1;
+  const reward=rewardFor(n);
+  addExp(reward.exp);
+  state.answered.push(n);
+  state.index++;
+  save();
+  render();
+  // Render resets the feedback area, so show the success message AFTER rendering.
+  if(state.index>=100){
+    feedback(`🏆 Chính xác! ${q[1]} = ${q[0]}. Bạn đã hoàn thành cả 100 câu!`,"good");
+  } else {
+    feedback(`🎉 Chính xác! ${q[1]} = ${q[0]}. +${reward.exp} EXP${state.infinite?" (EXP vô hạn vẫn bật)":reward.mult>1?` · Thưởng ×${reward.mult}`:""}`,"good");
+    toast(`Câu ${n} chính xác! Tiếp tục câu ${state.index+1}.`);
+  }
+ } else feedback("Chưa đúng rồi, thử lại nhé! Không mất EXP. 💪","bad");
+}
+function reveal(){
+ if(!current())return;
+ if(!state.permanent&&!state.godmode&&state.revealCards<1){feedback("Bạn chưa có thẻ xem đáp án. Mua ở cửa hàng hoặc mở khóa bằng cheat nhé.","neutral");return;}
+ if(!state.permanent&&!state.godmode)state.revealCards--;
+ feedback(`👁️ Đáp án: ${current()[1]}. Câu vẫn chưa được tính hoàn thành.`, "neutral");save();renderShop();
+}
+function skip(){
+ if(!current())return;
+ feedback(`⏭️ Đáp án: ${current()[1]}. Nhận +0 EXP cho câu này.`, "neutral");
+ const n=state.index+1;state.skipped.push(n);state.index++;save();render();
+ if(state.index>=100)feedback("🏆 Đã hoàn thành cả 100 câu!","good");
+}
+function useHint(){
+ if(!current())return;
+ if(state.godmode){feedback(`💡 Gợi ý nâng cao: ${current()[1].length} ký tự; bắt đầu bằng “${current()[1][0].toUpperCase()}”.`,"neutral");return;}
+ if(state.hintCards<1){feedback("Bạn chưa có thẻ gợi ý. Mua trong cửa hàng nhé.","neutral");return;}
+ state.hintCards--;feedback(`💡 Gợi ý nâng cao: ${current()[1].length} ký tự; bắt đầu bằng “${current()[1][0].toUpperCase()}”.`,"neutral");save();renderShop();
+}
+function buy(kind){
+ const prices={hint:100,reveal:99999,permanent:999999,skip:0};
+ if(kind==="skip"){skip();return;}
+ if(kind==="permanent"&&state.permanent){toast("Bạn đã sở hữu tính năng này rồi!");return;}
+ const price=prices[kind];
+ if(!state.infinite&&state.exp<price){toast("Không đủ EXP để mua vật phẩm.");return;}
+ if(!state.infinite)state.exp-=price;
+ if(kind==="hint")state.hintCards++;
+ if(kind==="reveal")state.revealCards++;
+ if(kind==="permanent")state.permanent=true;
+ save();render();renderShop();
+ toast(kind==="hint"?"Đã mua 1 thẻ gợi ý!":kind==="reveal"?"Đã mua 1 thẻ xem đáp án!":"👑 Đã mở khóa xem đáp án vĩnh viễn!");
+}
+function renderShop(){
+ $("shopExp").textContent=state.infinite?"∞":state.exp.toLocaleString("vi-VN");
+ document.querySelector('[data-buy="permanent"]').textContent=state.permanent?"Đã sở hữu":"Mua";
+ document.querySelector('[data-buy="permanent"]').disabled=state.permanent;
+}
+function openModal(){$("cheatModal").classList.add("show");$("cheatFeedback").className="feedback";$("cheatFeedback").textContent="";if(state.unlocked){$("passwordForm").hidden=true;$("cheatCommands").hidden=false;$("modalDescription").textContent="Chọn lệnh cheat để áp dụng trong trò chơi.";}else{$("passwordForm").hidden=false;$("cheatCommands").hidden=true;$("modalDescription").textContent="Nhập mật khẩu để mở bảng lệnh riêng trong game.";$("passwordInput").value="";setTimeout(()=>$("passwordInput").focus(),50);}}
+function closeModal(){$("cheatModal").classList.remove("show");}
+$("checkBtn").addEventListener("click",check);
+$("answerInput").addEventListener("keydown",e=>{if(e.key==="Enter")check();});
+$("revealBtn").addEventListener("click",reveal);$("skipBtn").addEventListener("click",skip);$("hintBtn").addEventListener("click",useHint);
+$("shopBtn").addEventListener("click",()=>{$("shopPanel").scrollIntoView({behavior:"smooth",block:"start"});toast("Cửa hàng đã sẵn sàng bên dưới.");});
+document.querySelectorAll("[data-buy]").forEach(b=>b.addEventListener("click",()=>buy(b.dataset.buy)));
+$("cheatBtn").addEventListener("click",openModal);$("closeModal").addEventListener("click",closeModal);
+$("cheatModal").addEventListener("click",e=>{if(e.target===$("cheatModal"))closeModal();});
+$("passwordForm").addEventListener("submit",e=>{e.preventDefault();if($("passwordInput").value===PASS){state.unlocked=true;save();$("passwordForm").hidden=true;$("cheatCommands").hidden=false;$("modalDescription").textContent="Đã mở khóa. Chọn lệnh muốn chạy.";$("cheatFeedback").className="feedback good";$("cheatFeedback").textContent="🔓 Mở khóa thành công!";}else{$("cheatFeedback").className="feedback bad";$("cheatFeedback").textContent="Sai mật khẩu. Vui lòng thử lại."; }});
+$("runCommand").addEventListener("click",()=>{
+ const cmd=document.querySelector('input[name="command"]:checked').value;
+ if(cmd==="INFINITE_EXP"){state.infinite=true;toast("♾️ INFINITE_EXP đã bật!");}
+ else if(cmd==="MAXEXP"){state.infinite=false;state.exp=999999;toast("💎 EXP đã đặt thành 999.999!");}
+ else if(cmd==="SHOWANSWER"){if(!current())toast("Bạn đã hoàn thành tất cả câu hỏi!");else{feedback(`👁️ Đáp án: ${current()[1]}. Câu vẫn chưa được tính hoàn thành.`,"neutral");toast("Đã hiện đáp án.");}}
+ else if(cmd==="GODMODE"){state.godmode=true;state.permanent=true;state.infinite=true;toast("👑 GODMODE đã bật!");}
+ save();render();renderShop();closeModal();
+});
+$("lockCheat").addEventListener("click",()=>{state.unlocked=false;save();$("passwordForm").hidden=false;$("cheatCommands").hidden=true;$("passwordInput").value="";$("modalDescription").textContent="Nhập mật khẩu để mở bảng lệnh riêng trong game.";toast("Bảng cheat đã khóa.");});
+render();renderShop();
+})();
+</script>
+<script>
+if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js").catch(err => console.warn("Service worker registration failed:", err)));
+}
+</script>
+</body></html>

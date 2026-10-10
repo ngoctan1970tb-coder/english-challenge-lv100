@@ -1,0 +1,27 @@
+{
+  "id": "./",
+  "name": "English Challenge LV100",
+  "short_name": "English LV100",
+  "description": "Game học từ vựng tiếng Anh với 100 câu hỏi, EXP và gợi ý.",
+  "lang": "vi",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b1020",
+  "theme_color": "#0b1020",
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
